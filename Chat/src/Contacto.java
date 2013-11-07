@@ -8,7 +8,7 @@
  *
  * @author Santiago-Laptop
  */
-class Contactos {
+class Contacto {
     
     private String id;
     private String name;
@@ -55,4 +55,11 @@ class Contactos {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+    
+    
 }
