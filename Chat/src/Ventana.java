@@ -1,3 +1,7 @@
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +19,7 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+        this.cargarContactos();
     }
 
     /**
@@ -156,4 +161,21 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarContactos() {
+        javax.swing.DefaultComboBoxModel modeloDe = new javax.swing.DefaultComboBoxModel();
+        javax.swing.DefaultComboBoxModel modeloPara = new javax.swing.DefaultComboBoxModel();     
+        try {
+            ArrayList<Contacto> lista = VentanaHandler.getContactos();
+            for (Contacto c : lista) {
+                modeloDe.addElement(c);
+                modeloPara.addElement(c);
+            }
+            jComboBox1.setModel(modeloDe);
+            jComboBox2.setModel(modeloPara);
+
+        } catch (SQLException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 }
