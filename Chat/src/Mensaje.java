@@ -1,7 +1,7 @@
 
 
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,7 +20,7 @@ class Mensaje {
     private String cuerpo;
     private String nombre_de;
     private String nombre_ha;
-    private Date fecha;
+    private Timestamp fecha;
 
     /**
      * @return the id_de
@@ -95,14 +95,14 @@ class Mensaje {
     /**
      * @return the fecha
      */
-    public Date getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 }

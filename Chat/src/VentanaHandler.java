@@ -82,7 +82,7 @@ public class VentanaHandler {
                 mensaje.setNombre_de(rs.getString(7));
                 mensaje.setNombre_ha(rs.getString(10));
                 mensaje.setCuerpo(rs.getString(3));
-                mensaje.setFecha(rs.getDate(4));
+                mensaje.setFecha(rs.getTimestamp(4));
                 mensajes.add(mensaje);
             }
         } catch (Exception e) {
