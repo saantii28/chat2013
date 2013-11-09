@@ -1,6 +1,8 @@
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -65,6 +67,11 @@ public class Ventana extends javax.swing.JFrame {
         jTextField1.setToolTipText("");
 
         jButton1.setText("Enviar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,6 +122,17 @@ public class Ventana extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Contacto co_de = (Contacto) jComboBox1.getSelectedItem();
+        Contacto co_ha = (Contacto) jComboBox2.getSelectedItem();
+        String mensaje = jTextField1.getText();
+        try {
+            VentanaHandler.insertarMensaje(co_de, co_ha, mensaje);
+        } catch (SQLException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
