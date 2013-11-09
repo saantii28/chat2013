@@ -55,4 +55,40 @@ public class VentanaHandler {
         }
     }
     
+    static ArrayList<Mensaje> getMensajes(Contacto co_de, Contacto co_ha) {
+        ArrayList<Mensaje> mensajes = new ArrayList();
+        Connection con;
+        PreparedStatement stmt;
+        try {
+            con = DBHandler.getConnection();
+            stmt = con.prepareStatement(""
+                    + "SELECT * "
+                    + "FROM mensajes m, contactos cde, contactos cha "
+                    + "WHERE "
+                    + "cde.co_id = m.co_id_de AND "
+                    + "cha.co_id = m.co_id_ha AND "
+                    + "((cde.co_id = ? AND cha.co_id = ?) "
+                    + "OR "
+                    + "(cde.co_id = ? AND cha.co_id = ?)) ");
+            stmt.setString(1, co_de.getId());
+            stmt.setString(2, co_ha.getId());
+            stmt.setString(3, co_ha.getId());
+            stmt.setString(4, co_de.getId());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Mensaje mensaje = new Mensaje();
+                mensaje.setId_de(rs.getString(1));
+                mensaje.setId_ha(rs.getString(2));
+                mensaje.setNombre_de(rs.getString(7));
+                mensaje.setNombre_ha(rs.getString(10));
+                mensaje.setCuerpo(rs.getString(3));
+                mensaje.setFecha(rs.getDate(4));
+                mensajes.add(mensaje);
+            }
+        } catch (Exception e) {
+        }
+        
+        return mensajes;
+    }
+    
 }
