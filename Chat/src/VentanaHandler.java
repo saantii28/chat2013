@@ -38,5 +38,22 @@ public class VentanaHandler {
         }
         return contactos;
     }
+
+    static void insertarMensaje(Contacto co_de, Contacto co_ha, String mensaje) throws SQLException {
+        Connection con;
+        PreparedStatement stmt;
+        try {
+            con = DBHandler.getConnection();
+            stmt = con.prepareStatement("INSTERT INTO mensajes "
+                    + "(co_id_de, co_id_ha, msg_cuerpo) VALUES (?, ?, ?)");
+            stmt.setString(1, co_de.getId());
+            stmt.setString(2, co_ha.getId());
+            stmt.setString(3, mensaje);
+            stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
     
 }
