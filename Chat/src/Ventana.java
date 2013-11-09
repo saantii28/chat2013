@@ -1,6 +1,8 @@
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +24,7 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
         this.cargarContactos();
+        this.cargarMensajes();
     }
 
     /**
@@ -194,6 +197,28 @@ public class Ventana extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    private void cargarMensajes() {
+        try {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+
+                @Override
+                public void run() {
+                    jTextArea1.setText(""); // Poner en blanco el area de texto
+                    Contacto co_de = (Contacto) jComboBox1.getSelectedItem();
+                    Contacto co_ha = (Contacto) jComboBox1.getSelectedItem();
+                    ArrayList<Mensaje> mensajes =
+                            VentanaHandler.getMensajes(co_de, co_ha);
+                    for (Mensaje m : mensajes) {
+                        jTextArea1.append(m.getCuerpo() + '\n');
+                    }
+                }
+            }, 0, 1000);
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
 }
