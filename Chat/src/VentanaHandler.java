@@ -19,18 +19,18 @@ public class VentanaHandler {
     
     public static ArrayList<Contacto> getContactos() throws SQLException{
         ArrayList<Contacto> contactos = new ArrayList();
-        Connection c = null;
-        PreparedStatement stmt = null;
+        Connection con;
+        PreparedStatement stmt;
         try {
-            c = DBHandler.getConnection();
-            stmt = c.prepareStatement("Select * from contactos");
+            con = DBHandler.getConnection();
+            stmt = con.prepareStatement("Select * from contactos");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Contacto co = new Contacto();
-                co.setId(rs.getString("co_id"));
-                co.setName(rs.getString("co_name"));
-                co.setMail(rs.getString("co_mail"));
-                contactos.add(co);
+                Contacto c = new Contacto();
+                c.setId(rs.getString("co_id"));
+                c.setName(rs.getString("co_name"));
+                c.setMail(rs.getString("co_mail"));
+                contactos.add(c);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
